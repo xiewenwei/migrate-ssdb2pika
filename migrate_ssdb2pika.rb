@@ -39,8 +39,8 @@ class Migration
 
       @pika = Redis.new(url: 'redis://192.168.0.2:7981')
     elsif env == 'production'
-      @ssdb = SSDB.new url: "ssdb://192.168.1.10:7983"
-      @ssdb_redis = Redis.new url: "redis://192.168.1.10:7983"
+      @ssdb = SSDB.new url: "ssdb://192.168.1.10:7981"
+      @ssdb_redis = Redis.new url: "redis://192.168.1.10:7981"
 
       @pika = Redis.new(url: 'redis://192.168.1.12:7981')
     else
