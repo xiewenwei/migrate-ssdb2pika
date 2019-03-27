@@ -1,0 +1,21 @@
+GIT
+  remote: https://github.com/xiewenwei/ssdb-rb.git
+  revision: 911a14a06545431b547fb61379050c3a53b0ce29
+  branch: feature/support-hlist-and-hscan
+  specs:
+    ssdb (0.1.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    redis (3.3.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  redis (= 3.3.5)
+  ssdb!
+
+BUNDLED WITH
+   1.16.2
