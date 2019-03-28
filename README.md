@@ -37,6 +37,8 @@ SSDB 使用 zclear 方法删除 zset 的 key，而 Redis/Pika 并不支持 zclea
 
 迁移完成后改为只使用 `$ssdb.del key` 即可。
 
+SSDB 和 Redis/Pika 双写代理和迁移历史数据工具尽管放在一个 Gem 里，但它们是相互独立的。
+
 ## 2、迁移历史数据工具
 
 ### 安装
