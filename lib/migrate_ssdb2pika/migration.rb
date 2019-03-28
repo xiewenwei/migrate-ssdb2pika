@@ -12,24 +12,37 @@ module MigrateSsdb2pika
 
     def start
       setup_client
+      log_message("start")
       case @options[:mode]
         when 'kv'
           scan_key_values
+          log_message("scan_key_values done")
         when 'hash'
           scan_all_hashs
+          log_message("scan_all_hashs done")
         when 'zset'
           scan_all_zsets
+          log_message("scan_all_zsets done")
         when 'queue'
           scan_all_queues
+          log_message("scan_all_queues done")
         else
           scan_key_values
+          log_message("scan_key_values done")
           scan_all_hashs
+          log_message("scan_all_hashs done")
           scan_all_zsets
+          log_message("scan_all_zsets done")
           scan_all_queues
+          log_message("scan_all_queues done")
       end
     end
 
     private
+
+    def log_message(msg)
+      puts "[#{Time.now.to_s}] #{msg}"
+    end
 
     def setup_client
       @ssdb = SSDB.new url: "ssdb://#{@options[:ssdb_host]}:#{@options[:ssdb_port]}"
