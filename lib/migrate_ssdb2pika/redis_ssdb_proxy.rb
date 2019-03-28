@@ -25,6 +25,16 @@ module MigrateSsdb2pika
       end
     end
 
+    def clear_hash(key)
+      if master.ssdb?
+        master.hclear key
+        slave.del key
+      else
+        master.del key
+        slave.hclear key
+      end
+    end
+
     class << self
       private
 
