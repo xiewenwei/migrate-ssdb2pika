@@ -46,9 +46,25 @@ SSDB 使用 zclear 方法删除 zset 的 key，而 Redis/Pika 并不支持 zclea
 
 ### 运行方法
 
-* `bundle exec bin/ssdb2pika -e [qa|production] -m kv/hash/zset/queue/all`
+```shell
+bin/ssdb2pika --ssdb_host=xxx --ssdb_port=xxx \
+  --pika_host=xxx --pika_port=xx \
+  -m <kv|hash|zset|queue|all>
+```
 
-如果担心执行时间过长，可以使用 `nohup` 方式执行
+例如：
+
+```shell
+bin/ssdb2pika --ssdb_host=192.168.0.10 --ssdb_port=7981 \
+--pika_host=192.168.0.12 --pika_port=7981 -m all
+```
+
+如果担心执行时间过长，可以使用 `nohup` 方式执行。
+
+```shell
+nohup bin/ssdb2pika --ssdb_host=192.168.0.10 --ssdb_port=7981 \
+--pika_host=192.168.0.12 --pika_port=7981 -m all &
+```
 
 ### 原理
 
@@ -59,4 +75,4 @@ SSDB 使用 zclear 方法删除 zset 的 key，而 Redis/Pika 并不支持 zclea
 * 通过 `zlist` 遍历 zset 所有 name，通过 `zscan` 遍历某一个 zset 里所有 member-score
 * 通过 `qlist` 遍历 queue 所有 name
 
-更改 `ssdb-rb` 代码以支持 hlist/hscan/qlist
+更改 `ssdb-rb` 代码以支持 hlist/hscan/qlist/qrange
