@@ -7,7 +7,13 @@
 
 ### 使用方法
 
-* 在目标项目（通常是 Rails 应用）引入 `migrate_ssdb2pika` gem
+* 在目标项目（通常是 Rails 应用）引入 `migrate-ssdb2pika` gem
+
+```ruby
+  gem 'migrate-ssdb2pika',
+    git: 'https://github.com/xiewenwei/migrate-ssdb2pika.git'
+```
+
 * 配置 SSDB 连接生成以支持双写
 
 例如：
