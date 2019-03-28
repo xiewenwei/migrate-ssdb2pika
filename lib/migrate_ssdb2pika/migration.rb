@@ -32,9 +32,9 @@ module MigrateSsdb2pika
     private
 
     def setup_client
-      @ssdb = SSDB.new host: @options[:ssdb_host], port: @options[:ssdb_port]
-      @ssdb_redis = Redis.new host: @options[:ssdb_host], port: @options[:ssdb_port]
-      @pika = Redis.new host: @options[:pika_host], port: @options[:pika_port]
+      @ssdb = SSDB.new url: "ssdb://#{@options[:ssdb_host]}:#{@options[:ssdb_port]}"
+      @ssdb_redis = Redis.new url: "redis://#{@options[:ssdb_host]}:#{@options[:ssdb_port]}"
+      @pika = Redis.new url: "redis://#{@options[:pika_host]}:#{@options[:pika_port]}"
     end
 
     # key-value scan
