@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    migrate_ssdb2pika (0.1.0)
+    migrate-ssdb2pika (0.1.0)
       redis (>= 3)
 
 GEM
@@ -22,7 +22,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  migrate_ssdb2pika!
+  migrate-ssdb2pika!
   minitest (~> 5.0)
   rake (~> 10.0)
   ssdb!
