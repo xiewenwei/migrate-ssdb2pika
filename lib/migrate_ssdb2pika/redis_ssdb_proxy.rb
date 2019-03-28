@@ -1,8 +1,6 @@
 
-# 不支持 Set，不支持类型不一致的 Redis::Object
-
-module RedisSsdbProxy
-  class Client
+module MigrateSsdb2pika
+  class RedisSsdbProxy
     attr_accessor :master, :slave
 
     def initialize(master: nil, slave: nil, master_is_ssdb: true)
@@ -103,10 +101,5 @@ module RedisSsdbProxy
         super
       end
     end
-  end # Client
-
-  def self.new(*args)
-    Client.new(*args)
-  end
-
-end # RedisSsdbProxy
+  end # RedisSsdbProxy
+end # MigrateSsdb2pika

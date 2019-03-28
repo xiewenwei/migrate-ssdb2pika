@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require "pathname"
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile",
+  Pathname.new(__FILE__).realpath)
+
+require "rubygems"
+require "bundler/setup"
+
+require 'optparse'
+require 'migrate_ssdb2pika/migration'
+
+def parse_options
+  options = {
+    mode: 'all',
+    write: 'yes'
+  }
+
+  optparse = OptionParser.new do |opts|
+    opts.banner = "Usage: bin/ssdb2pika <options>"
+
+    opts.on('', '--ssdb_host host', 'host of ssdb') do |value|
+      options[:ssdb_host] = value
+    end
+    opts.on('', '--ssdb_port port', 'port of ssdb') do |value|
+      options[:ssdb_port] = value
+    end
+
+    opts.on('', '--pika_host host', 'host of pika/redis') do |value|
+      options[:pika_host] = value
+    end
+    opts.on('', '--pika_port port', 'port of pika/redis') do |value|
+      options[:pika_port] = value
+    end
+
+    opts.on('-m', '--mode mode', 'Mode (kv/hash/zset/queue default all)') do |value|
+      options[:mode] = value
+    end
+    opts.on('-w', '--write write', 'write pika or not (yes/no)') do |value|
+      options[:write] = value
+    end
+  end
+
+  # 检查参数
+  begin
+    optparse.parse!
+    mandatory = [:ssdb_host, :ssdb_port, :pika_host, :pika_port]
+    missing = mandatory.select{ |param| options[param].nil? }
+    raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+    options
+  rescue OptionParser::ParseError => e
+    puts e
+    puts optparse
+    exit
+  end
+
+end
+
+MigrateSsdb2pika::Migration.new(parse_options).start
