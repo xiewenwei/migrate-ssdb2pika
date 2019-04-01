@@ -1,3 +1,4 @@
+require 'test_helper'
 
 require 'migrate_ssdb2pika/migration'
 

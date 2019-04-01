@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    migrate-ssdb2pika (0.1.0)
+    migrate-ssdb2pika (0.1.1)
       redis (>= 3)
 
 GEM
